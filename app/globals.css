@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Using dark mode values as default */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --radius: 0;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Limit transitions to background elements only, remove from text elements */
+  .bg-background,
+  .bg-card,
+  .bg-popover,
+  .bg-primary,
+  .bg-secondary,
+  .bg-muted,
+  .bg-accent,
+  .border-border {
+    transition: all 0.3s ease;
+  }
+
+  /* Remove transition from text elements */
+  .text-foreground,
+  .text-card-foreground,
+  .text-popover-foreground,
+  .text-primary-foreground,
+  .text-secondary-foreground,
+  .text-muted-foreground,
+  .text-accent-foreground,
+  button {
+    transition: none;
+  }
+
+  /* Remove transitions from SVG icons and paths within buttons */
+  button svg,
+  button svg *,
+  .button svg,
+  .button svg * {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Target Lucide icons specifically */
+  [data-lucide],
+  .lucide,
+  .lucide-icon {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    stroke: currentColor !important;
+    fill: none !important;
+  }
+
+  /* Ensure variant changes don't animate */
+  button[variant="default"] svg,
+  button[variant="outline"] svg,
+  [data-variant="default"] svg,
+  [data-variant="outline"] svg {
+    transition: none !important;
+  }
+
+  /* Custom utility class to remove all transitions */
+  .transition-none,
+  .transition-none * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Text styles for dark mode - no transitions or animations */
+  h1, h2, h3, h4, h5, h6, p, span, a, button, label, input, textarea {
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: none;
+  }
+}
+
+/* Make header background transparent */
+header.sticky.top-0.z-10.flex.h-\[53px\].items-center.gap-1.bg-background.px-4 {
+  background-color: transparent !important;
+  backdrop-filter: none;
+  border-bottom: none;
+  border-radius: 0 !important;
+}
+
+/* Ensure nav has no border radius */
+nav.flex.items-center.justify-between.px-4.py-2.bg-background.border-b {
+  border-radius: 0 !important;
+  border-bottom-width: 0px !important;
+  background-color: transparent !important;
+}
+
+/* Mobile-specific styles to hide elements as per requirements */
+@media (max-width: 767px) {
+  /* We've removed the logo already in the component */
+  
+  /* Hide GitHub & Discord icons/buttons in the header, but keep the theme toggle */
+  nav.flex.items-center.justify-between.px-4.py-2.bg-background.border-b a[href*="github.com"],
+  nav.flex.items-center.justify-between.px-4.py-2.bg-background.border-b a[href*="discord.gg"] {
+    display: none;
+  }
+  
+  /* Make theme toggle more prominent */
+  nav.flex.items-center.justify-between.px-4.py-2.bg-background.border-b button:has(span.sr-only) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    border-width: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Hide the left sidebar */
+  aside.flex.flex-col {
+    display: none;
+  }
+  
+  /* Hide Help link in sidebar footer */
+  nav.sticky.bottom-0.p-2.bg-background.border-t {
+    display: none;
+  }
+  
+  /* Ensure main content takes full width when sidebar is hidden */
+  main.flex-1 {
+    width: 100%;
+  }
+  
+  /* Empty header styling */
+  header.sticky.top-0.z-10.flex.h-\[53px\].items-center.gap-1.bg-background.px-4 {
+    justify-content: flex-end;
+    padding-right: 0.75rem;
+    background-color: transparent !important;
+  }
+}

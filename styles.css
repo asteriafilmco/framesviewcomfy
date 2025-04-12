@@ -1,0 +1,26 @@
+.custom-dropzone {
+    height: 100px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-dropzone {
+    height: 20px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fix for white circle in history gallery */
+.no-pseudo-elements::before,
+.no-pseudo-elements::after,
+.no-pseudo-elements *::before,
+.no-pseudo-elements *::after {
+  display: none !important;
+  border: none !important;
+  content: none !important;
+  background: transparent !important;
+}

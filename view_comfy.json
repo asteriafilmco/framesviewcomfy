@@ -1,0 +1,374 @@
+{
+  "file_type": "view_comfy",
+  "file_version": "1.0.0",
+  "version": "0.0.1",
+  "workflows": [
+    {
+      "viewComfyJSON": {
+        "title": "Txt2img",
+        "description": "Simple flux schnell text to image",
+        "previewImages": [
+          "/preview_images/1743461586195-Blue.png",
+          null,
+          null
+        ],
+        "inputs": [
+          {
+            "title": "CLIP Text Encode (Prompt)",
+            "inputs": [
+              {
+                "title": "CLIP Text Encode (Prompt)",
+                "placeholder": "CLIP Text Encode (Prompt)",
+                "value": "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,",
+                "workflowPath": [
+                  "6",
+                  "inputs",
+                  "text"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "long-text",
+                "validations": {
+                  "required": true
+                },
+                "key": "6-inputs-text"
+              }
+            ],
+            "key": "6-CLIPTextEncode"
+          },
+          {
+            "title": "CLIP Text Encode (Prompt)",
+            "inputs": [
+              {
+                "title": "CLIP Text Encode (Prompt)",
+                "placeholder": "CLIP Text Encode (Prompt)",
+                "value": "text, watermark",
+                "workflowPath": [
+                  "7",
+                  "inputs",
+                  "text"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "long-text",
+                "validations": {
+                  "required": true
+                },
+                "key": "7-inputs-text"
+              }
+            ],
+            "key": "7-CLIPTextEncode"
+          }
+        ],
+        "advancedInputs": [
+          {
+            "title": "KSampler",
+            "inputs": [
+              {
+                "title": "Seed",
+                "placeholder": "Seed",
+                "value": 758815031092573,
+                "workflowPath": [
+                  "3",
+                  "inputs",
+                  "seed"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "seed",
+                "validations": {
+                  "required": true
+                },
+                "key": "3-inputs-seed"
+              },
+              {
+                "title": "Steps",
+                "placeholder": "Steps",
+                "value": 4,
+                "workflowPath": [
+                  "3",
+                  "inputs",
+                  "steps"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "number",
+                "validations": {
+                  "required": true
+                },
+                "key": "3-inputs-steps"
+              },
+              {
+                "title": "Cfg",
+                "placeholder": "Cfg",
+                "value": 1,
+                "workflowPath": [
+                  "3",
+                  "inputs",
+                  "cfg"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "number",
+                "validations": {
+                  "required": true
+                },
+                "key": "3-inputs-cfg"
+              },
+              {
+                "title": "Sampler_name",
+                "placeholder": "Sampler_name",
+                "value": "euler",
+                "workflowPath": [
+                  "3",
+                  "inputs",
+                  "sampler_name"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "string",
+                "validations": {
+                  "required": true
+                },
+                "key": "3-inputs-sampler_name"
+              },
+              {
+                "title": "Scheduler",
+                "placeholder": "Scheduler",
+                "value": "normal",
+                "workflowPath": [
+                  "3",
+                  "inputs",
+                  "scheduler"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "string",
+                "validations": {
+                  "required": true
+                },
+                "key": "3-inputs-scheduler"
+              },
+              {
+                "title": "Denoise",
+                "placeholder": "Denoise",
+                "value": 1,
+                "workflowPath": [
+                  "3",
+                  "inputs",
+                  "denoise"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "number",
+                "validations": {
+                  "required": true
+                },
+                "key": "3-inputs-denoise"
+              }
+            ],
+            "key": "3-KSampler"
+          },
+          {
+            "title": "Load Checkpoint",
+            "inputs": [
+              {
+                "title": "Ckpt_name",
+                "placeholder": "Ckpt_name",
+                "value": "Flux/flux1-schnell-fp8.safetensors",
+                "workflowPath": [
+                  "4",
+                  "inputs",
+                  "ckpt_name"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "string",
+                "validations": {
+                  "required": true
+                },
+                "key": "4-inputs-ckpt_name"
+              }
+            ],
+            "key": "4-CheckpointLoaderSimple"
+          },
+          {
+            "title": "Empty Latent Image",
+            "inputs": [
+              {
+                "title": "Width",
+                "placeholder": "Width",
+                "value": 1024,
+                "workflowPath": [
+                  "5",
+                  "inputs",
+                  "width"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "number",
+                "validations": {
+                  "required": true
+                },
+                "key": "5-inputs-width"
+              },
+              {
+                "title": "Height",
+                "placeholder": "Height",
+                "value": 1024,
+                "workflowPath": [
+                  "5",
+                  "inputs",
+                  "height"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "number",
+                "validations": {
+                  "required": true
+                },
+                "key": "5-inputs-height"
+              },
+              {
+                "title": "Batch_size",
+                "placeholder": "Batch_size",
+                "value": 1,
+                "workflowPath": [
+                  "5",
+                  "inputs",
+                  "batch_size"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "number",
+                "validations": {
+                  "required": true
+                },
+                "key": "5-inputs-batch_size"
+              }
+            ],
+            "key": "5-EmptyLatentImage"
+          },
+          {
+            "title": "Save Image",
+            "inputs": [
+              {
+                "title": "Filename_prefix",
+                "placeholder": "Filename_prefix",
+                "value": "View_comfy",
+                "workflowPath": [
+                  "9",
+                  "inputs",
+                  "filename_prefix"
+                ],
+                "helpText": "Helper Text",
+                "valueType": "string",
+                "validations": {
+                  "required": true
+                },
+                "key": "9-inputs-filename_prefix"
+              }
+            ],
+            "key": "9-SaveImage"
+          }
+        ],
+        "id": "1c091028ac0b4"
+      },
+      "workflowApiJSON": {
+        "3": {
+          "inputs": {
+            "seed": 758815031092573,
+            "steps": 4,
+            "cfg": 1,
+            "sampler_name": "euler",
+            "scheduler": "normal",
+            "denoise": 1,
+            "model": [
+              "4",
+              0
+            ],
+            "positive": [
+              "6",
+              0
+            ],
+            "negative": [
+              "7",
+              0
+            ],
+            "latent_image": [
+              "5",
+              0
+            ]
+          },
+          "class_type": "KSampler",
+          "_meta": {
+            "title": "KSampler"
+          }
+        },
+        "4": {
+          "inputs": {
+            "ckpt_name": "Flux/flux1-schnell-fp8.safetensors"
+          },
+          "class_type": "CheckpointLoaderSimple",
+          "_meta": {
+            "title": "Load Checkpoint"
+          }
+        },
+        "5": {
+          "inputs": {
+            "width": 1024,
+            "height": 1024,
+            "batch_size": 1
+          },
+          "class_type": "EmptyLatentImage",
+          "_meta": {
+            "title": "Empty Latent Image"
+          }
+        },
+        "6": {
+          "inputs": {
+            "text": "beautiful scenery nature glass bottle landscape, , purple galaxy bottle,",
+            "clip": [
+              "4",
+              1
+            ]
+          },
+          "class_type": "CLIPTextEncode",
+          "_meta": {
+            "title": "CLIP Text Encode (Prompt)"
+          }
+        },
+        "7": {
+          "inputs": {
+            "text": "text, watermark",
+            "clip": [
+              "4",
+              1
+            ]
+          },
+          "class_type": "CLIPTextEncode",
+          "_meta": {
+            "title": "CLIP Text Encode (Prompt)"
+          }
+        },
+        "8": {
+          "inputs": {
+            "samples": [
+              "3",
+              0
+            ],
+            "vae": [
+              "4",
+              2
+            ]
+          },
+          "class_type": "VAEDecode",
+          "_meta": {
+            "title": "VAE Decode"
+          }
+        },
+        "9": {
+          "inputs": {
+            "filename_prefix": "ComfyUI",
+            "images": [
+              "8",
+              0
+            ]
+          },
+          "class_type": "SaveImage",
+          "_meta": {
+            "title": "Save Image"
+          }
+        }
+      }
+    }
+  ]
+}
