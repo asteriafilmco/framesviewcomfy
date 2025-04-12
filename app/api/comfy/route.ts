@@ -1,9 +1,12 @@
 import { ComfyUIService } from '@/app/services/comfyui-service';
 import { type NextRequest, NextResponse } from 'next/server';
 import { ErrorResponseFactory } from '@/app/models/errors';
+import { v4 as uuidv4 } from 'uuid';
 import { IViewComfy } from '@/app/interfaces/comfy-input';
+import { firebaseAdmin } from '@/lib/firebase';
 
 const errorResponseFactory = new ErrorResponseFactory();
+const db = firebaseAdmin.firestore();
 
 export async function POST(request: NextRequest) {
     const formData = await request.formData();
@@ -36,6 +39,25 @@ export async function POST(request: NextRequest) {
         // Pass custom endpoint to ComfyUIService if present
         const comfyUIService = new ComfyUIService(customEndpoint || undefined);
         const stream = await comfyUIService.runWorkflow({ workflow, viewComfy });
+        
+        const saveGenerationToFirestore = async (workflowId: string, viewComfy: IViewComfy, filename: string, timestamp: number) => {
+            try {
+                await db.collection('generations').add({
+                    workflowId,
+                    viewComfy,
+                    filename,
+                    timestamp,
+                });
+            } catch (error) {
+                console.error('Error saving generation to Firestore:', error);
+            }
+        };
+
+        await saveGenerationToFirestore(
+            uuidv4(),
+            viewComfy,
+            "generated_images.bin",
+            Date.now());
 
         return new NextResponse<ReadableStream<Uint8Array>>(stream, {
             headers: {

@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/playground/route": "app/api/playground/route.js",
+  "/api/comfy/outputs/route": "app/api/comfy/outputs/route.js",
+  "/api/comfy/static/[...path]/route": "app/api/comfy/static/[...path]/route.js"
+}

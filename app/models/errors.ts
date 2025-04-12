@@ -1,3 +1,11 @@
+export enum ErrorTypes {
+    COMFY_WORKFLOW = "ComfyWorkflowError",
+    COMFY = "ComfyError",
+    UNKNOWN = "UnknownError",
+    VIEW_MODE_MISSING_FILES = "ViewModeMissingFilesError",
+    FIREBASE = "FirebaseError",
+}
+
 export class ErrorBase {
     public message: string;
     public errors: string[];
@@ -24,6 +32,13 @@ export class ComfyError extends ErrorBase {
     }
 }
 
+export class FirebaseError extends ErrorBase {
+
+    constructor(message: string, errors: string[]) {
+        super({ message: message, errorType: ErrorTypes.FIREBASE, errors: errors });
+    }
+}
+
 
 
 export class ResponseError {
@@ -45,6 +60,13 @@ export class ErrorResponseFactory {
         if (error.errorType) {
             return new ResponseError({
                 errorMsg: error.message,
+                error: error.errors, 
+                errorType: error.errorType
+            });
+        }
+        if (error instanceof FirebaseError) {
+             return new ResponseError({
+                errorMsg: error.message,
                 error: error.errors,
                 errorType: error.errorType
             });
@@ -56,12 +78,5 @@ export class ErrorResponseFactory {
             errorType: ErrorTypes.UNKNOWN
         });
     }
-}
-
-export enum ErrorTypes {
-    COMFY_WORKFLOW = "ComfyWorkflowError",
-    COMFY = "ComfyError",
-    UNKNOWN = "UnknownError",
-    VIEW_MODE_MISSING_FILES = "ViewModeMissingFilesError",
 }
 
